@@ -1,0 +1,43 @@
+name = "musicify-tma-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Workers 配置
+workers_dev = true
+
+# 环境变量（生产环境使用 wrangler secret）
+[vars]
+ENVIRONMENT = "production"
+
+# D1 数据库绑定
+[[d1_databases]]
+binding = "DB"
+database_name = "musicify-db"
+database_id = "your-database-id" # 运行 wrangler d1 create musicify-db 后填入
+
+# R2 对象存储绑定
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "musicify-storage"
+
+# KV 命名空间绑定
+[[kv_namespaces]]
+binding = "KV"
+id = "your-kv-id" # 运行 wrangler kv:namespace create "musicify-kv" 后填入
+
+# 开发环境配置
+[env.dev]
+name = "musicify-tma-api-dev"
+
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "musicify-db-dev"
+database_id = "your-dev-database-id"
+
+[[env.dev.r2_buckets]]
+binding = "STORAGE"
+bucket_name = "musicify-storage-dev"
+
+[[env.dev.kv_namespaces]]
+binding = "KV"
+id = "your-dev-kv-id"
